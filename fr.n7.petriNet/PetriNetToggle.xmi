@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<petrinet:PetriNet
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:petrinet="http://petrinet"
+    xsi:schemaLocation="http://petrinet PetriNet.ecore">
+  <petriElements
+      xsi:type="petrinet:Place"
+      name="Off"
+      incoming="//@petriElements.5"
+      outgoing="//@petriElements.2"/>
+  <petriElements
+      xsi:type="petrinet:Place"
+      name="On"
+      incoming="//@petriElements.3"
+      outgoing="//@petriElements.4"/>
+  <petriElements
+      xsi:type="petrinet:Arc"
+      weight="1"
+      target="//@petriElements.6"
+      source="//@petriElements.0"/>
+  <petriElements
+      xsi:type="petrinet:Arc"
+      weight="1"
+      target="//@petriElements.1"
+      source="//@petriElements.6"/>
+  <petriElements
+      xsi:type="petrinet:Arc"
+      weight="1"
+      target="//@petriElements.7"
+      source="//@petriElements.1"/>
+  <petriElements
+      xsi:type="petrinet:Arc"
+      weight="1"
+      target="//@petriElements.0"
+      source="//@petriElements.7"/>
+  <petriElements
+      xsi:type="petrinet:Transition"
+      name="OffToOn"
+      incoming="//@petriElements.2"
+      outgoing="//@petriElements.3"/>
+  <petriElements
+      xsi:type="petrinet:Transition"
+      name="OnToOff"
+      incoming="//@petriElements.4"
+      outgoing="//@petriElements.5"/>
+</petrinet:PetriNet>

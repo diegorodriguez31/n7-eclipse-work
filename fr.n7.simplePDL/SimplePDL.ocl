@@ -1,0 +1,92 @@
+import 'SimplePDL.ecore'
+
+package simplepdl
+
+
+context Process
+inv warningSeverity: false
+inv withMessage('Explicit message in process ' + self.name + ' (withMessage)'): false
+--inv errorSeverity: null
+
+context Process
+inv validName('Invalid name: ' + self.name):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
+
+context ProcessElement
+def: process(): Process =
+	Process.allInstances()
+		->select(p | p.processElements->includes(self))
+		->asSequence()->first()
+
+context WorkSequence
+inv successorAndPredecessorInSameProcess('Activities not in the same process : '
+		+ self.predecessor.name + ' in ' + self.predecessor.process().name+ ' and '
+		+ self.successor.name + ' in ' + self.successor.process().name
+):
+	self.process() = self.successor.process()
+	and self.process() = self.predecessor.process()
+
+
+-- Contraintes additionnelles
+
+-- Deux activités différentes d'un même processus ne peuvent pas avoir le même nom
+context WorkDefinition
+inv uniqueWorkDefinitionName('WorkDefinition name ' + self.name + ' already exists'):
+	self.process().processElements
+	->select(e | e.oclIsKindOf(WorkDefinition))
+	->collect(e | e.oclAsType(WorkDefinition))
+	->select(e | self.name = e.name)
+	->size() = 1
+
+-- Une dépendance ne peut pas être réflexive	
+context WorkSequence
+inv notReflexive('The successor (' + self.successor.name + ') and the predecessor (' + self.predecessor.name + ') are the same'):
+	self.predecessor <> self.successor
+
+-- Le nom d'une activité doit être composée d'au moins deux caractères et composé que de lettres, chiffres ou soulignés.
+-- Un chiffre ne peut pas être en première position
+context WorkDefinition
+inv validWorkDefinitionName('Invalid WorkDefinition name: ' + self.name):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
+
+
+-- Contraintes associées au mini-projet
+
+-- -- Le nom d'une ressource doit être composée d'au moins deux caractères et composé que de lettres, chiffres ou soulignés.
+-- Un chiffre ne peut pas être en première position
+context Resource
+inv validResourceName('Invalid Resource name: ' + self.name):
+	self.name.matches('[A-Za-z_][A-Za-z0-9_]*')
+
+-- Il doit y avoir au moins une ressource pour un besoin
+context Resource
+inv hasOneOrMoreNbResources('Resource available should be greater or equal to 1: ' + self.name):
+	self.nbAvailableResources >= 1
+
+-- Deux ressources différentes d'un même besoin ne peuvent pas avoir le même nom
+context Resource
+inv uniqueResourceName('Resource name ' + self.name + ' already exists'):
+	self.process().processElements
+	->select(e | e.oclIsKindOf(Resource))
+	->collect(e | e.oclAsType(Resource))
+	->select(e | self.name = e.name)
+	->size() = 1
+
+-- Un besoin doit être associé à au moins une ressource et le nombre de ressources d'un besoin doit être inférieur ou égal
+-- au nombre de ressources disponibles
+context Need
+inv correctNeededNbResources('A WorkDefinition cannot need less than 1 or more than "nbAvailableResources" resources: ' + self.resource.name + ' for ' + self.workdefinition.name):
+	self.nbResources >= 1 and self.nbResources <= self.resource.nbAvailableResources
+
+-- L'activité et le besoin doivent appartenir au même process
+context Need
+inv resourceAndWorkDefinitionInSameProcess('Needed Resource and WorkDefinition not in the same process: ' + self.resource.name + ' for ' + self.workdefinition.name):
+	self.resource.process() = self.workdefinition.process()
+
+-- Deux besoins distincts ne doivent pas avoir la même ressource
+context WorkDefinition
+inv noRedundantNeed('Two Needs with the same Resource should not exist for the same WorkDefinition'):
+	self.need->forAll(n1,n2 : Need | n1 <> n2 implies n1.resource.name <> n2.resource.name)
+
+
+endpackage

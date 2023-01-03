@@ -1,0 +1,17 @@
+process Developpement {
+    create 4 of Developpeur
+    create 3 of Serveur 
+    
+    wd Coder {
+        need 3 of Developpeur
+    }
+    
+    wd Deployer {
+        need 2 of Serveur
+    }
+    
+    ws finishToStart from Coder to Deployer
+    
+    note "Toujours deployer sur aws" for Deployer
+    note "https://stackoverflow.com/" for Coder,Deployer
+}

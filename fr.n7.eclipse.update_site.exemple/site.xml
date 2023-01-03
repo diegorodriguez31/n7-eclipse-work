@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/fr.n7.eclipse.feature.exemple_1.0.0.202205222141.jar" id="fr.n7.eclipse.feature.exemple" version="1.0.0.202205222141">
+      <category name="N7 exemple"/>
+   </feature>
+   <feature url="features/fr.n7.eclipse.feature.simplepdl_1.0.0.202205222141.jar" id="fr.n7.eclipse.feature.simplepdl" version="1.0.0.202205222141">
+      <category name="N7 exemple"/>
+   </feature>
+   <feature url="features/fr.n7.eclipse.feature.toHTML_1.0.0.202205222141.jar" id="fr.n7.eclipse.feature.toHTML" version="1.0.0.202205222141">
+      <category name="N7 exemple"/>
+   </feature>
+   <feature url="features/fr.n7.eclipse.feature.todot_1.0.0.202205222141.jar" id="fr.n7.eclipse.feature.todot" version="1.0.0.202205222141">
+      <category name="N7 exemple"/>
+   </feature>
+   <feature url="features/fr.n7.eclipse.feature.petrinettotina_1.0.0.202205222141.jar" id="fr.n7.eclipse.feature.petrinettotina" version="1.0.0.202205222141">
+      <category name="N7 exemple"/>
+   </feature>
+   <feature url="features/fr.n7.eclipse.feature.xtext_1.0.0.202205222141.jar" id="fr.n7.eclipse.feature.xtext" version="1.0.0.202205222141">
+      <category name="N7 exemple"/>
+   </feature>
+   <feature url="features/fr.n7.eclipse.feature.xtextpdl2_1.0.0.202205222141.jar" id="fr.n7.eclipse.feature.xtextpdl2" version="1.0.0.202205222141">
+      <category name="N7 exemple"/>
+   </feature>
+   <feature url="features/fr.n7.eclipse.feature.xtextpdl3_1.0.0.202205222141.jar" id="fr.n7.eclipse.feature.xtextpdl3" version="1.0.0.202205222141">
+      <category name="N7 exemple"/>
+   </feature>
+   <feature url="features/fr.n7.eclipse.feature.simplePDL_1.0.0.202205222141.jar" id="fr.n7.eclipse.feature.simplePDL" version="1.0.0.202205222141">
+      <category name="N7 exemple"/>
+   </feature>
+   <feature url="features/fr.n7.eclipse.feature.xtextpdl_1.0.0.202205222141.jar" id="fr.n7.eclipse.feature.xtextpdl" version="1.0.0.202205222141">
+      <category name="N7 exemple"/>
+   </feature>
+   <feature url="features/fr.n7.eclipse.feature.simplepdltoltl_1.0.0.202205222141.jar" id="fr.n7.eclipse.feature.simplepdltoltl" version="1.0.0.202205222141">
+      <category name="N7 exemple"/>
+   </feature>
+   <category-def name="N7 exemple" label="N7 exemple"/>
+</site>
